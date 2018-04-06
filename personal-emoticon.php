@@ -3,20 +3,21 @@
 define('LINE_API', 'https://notify-api.line.me/api/notify');
 define('LINE_TOKEN', 'AnFzrvVuaT6iUiG8wz42jZMbLjjgeNlBhxqBwrgCzSl');
 
-line_notify(LINE_TOKEN);
+$message = array(
+    'message' => 'ง่วงจังเลย',
+    'stickerPackageId' => 1,
+    'stickerId' => 1,
+);
 
-function line_notify($token)
+line_notify(LINE_TOKEN, $message);
+
+function line_notify($token, $message)
 {
     $header = array( 
         'Content-type: application/x-www-form-urlencoded', 
         "Authorization: Bearer {$token}", );
         
-    $query = array(
-        'message' => 'ง่วงค่า',
-        'stickerPackageId' => 1,
-        'stickerId' => 1,
-    );
-    $data = http_build_query($query, '', '&');
+    $data = http_build_query($message, '', '&');
 
     $cURL = curl_init(); 
     curl_setopt( $cURL, CURLOPT_URL, LINE_API); 
