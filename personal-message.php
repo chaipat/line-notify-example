@@ -1,8 +1,12 @@
 <?php
+
 define('LINE_API', 'https://notify-api.line.me/api/notify');
 define('LINE_TOKEN', 'AnFzrvVuaT6iUiG8wz42jZMbLjjgeNlBhxqBwrgCzSl');
 
-$message = 'HEY';
+$message = array(
+    'message' => 'Hey',
+);
+
 line_notify(LINE_TOKEN, $message);
 
 function line_notify($token, $message)
@@ -11,8 +15,7 @@ function line_notify($token, $message)
         'Content-type: application/x-www-form-urlencoded', 
         "Authorization: Bearer {$token}", );
         
-    $query = array('message' => $message);
-    $data = http_build_query($query, '', '&');
+    $data = http_build_query($message, '', '&');
 
     $cURL = curl_init(); 
     curl_setopt( $cURL, CURLOPT_URL, LINE_API); 
